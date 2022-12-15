@@ -1,5 +1,7 @@
+import { Content } from './content'
+
 export interface NotificationProps {
-  content: string
+  content: Content
   category: string
   readAt?: Date | null
   createdAt: Date
@@ -9,15 +11,11 @@ export interface NotificationProps {
 export class Notification {
   constructor(private props: NotificationProps) {}
 
-  public set content(content: string) {
-    if (content.length < 5) {
-      throw new Error('generic')
-    }
-
+  public set content(content: Content) {
     this.props.content = content
   }
 
-  public get content() {
+  public get content(): Content {
     return this.props.content
   }
 
@@ -49,8 +47,8 @@ export class Notification {
     this.props.readAt = readAt
   }
 
-  public get readAt() {
-    return this.props.readAt
+  public get readAt(): Date {
+    return this.props.readAt || new Date()
   }
 
   public get createdAt() {
